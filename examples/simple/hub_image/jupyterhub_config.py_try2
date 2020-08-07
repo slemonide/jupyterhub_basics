@@ -1,0 +1,29 @@
+# dummy for testing. Don't use this in production!
+c.JupyterHub.authenticator_class = 'dummyauthenticator.DummyAuthenticator'
+
+# launch with docker
+c.JupyterHub.spawner_class = 'dockerspawner.DockerSpawner'
+
+# we need the hub to listen on all ips when it is in a container
+c.JupyterHub.hub_ip = '0.0.0.0'
+# the hostname/ip that should be used to connect to the hub
+# this is usually the hub container's name
+import netifaces
+docker0 = netifaces.ifaddresses('eth0')
+docker0_ipv4 = docker0[netifaces.AF_INET][0]
+c.JupyterHub.hub_connect_ip = docker0_ipv4['addr']
+
+
+# pick a docker image. This should have the same version of jupyterhub
+# in it as our Hub.
+c.DockerSpawner.image = 'phaustin/hub'
+
+# tell the user containers to connect to our docker network
+network_name = "jupyterhub"
+c.DockerSpawner.network_name = network_name
+c.DockerSpawner.use_internal_ip = True
+c.DockerSpawner.network_name = network_name
+c.DockerSpawner.extra_host_config = { 'network_mode': network_name }
+
+# delete containers when the stop
+c.DockerSpawner.remove = True
