@@ -6,6 +6,12 @@ services:
     image: hub
     container_name: jupyterhub
     depends_on: [notebook]
+    ports:
+      - "8000:8000"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    networks:
+      - jupyterhub
 
   notebook:
     image: jupyter/base-notebook
