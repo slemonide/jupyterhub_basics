@@ -14,7 +14,7 @@ services:
       - jupyterhub
 
   notebook:
-    image: jupyter/base-notebook:hub-1.1.0
+    image: jupyter/base-notebook:latest
     
 # the actual name will be <directory_name>_<network_name>
 networks:
