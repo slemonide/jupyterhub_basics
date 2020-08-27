@@ -1,11 +1,3 @@
-https://github.com/phaustin/jupyterhub_basics/issues/1
-
-cd jupyterhub_basics/examples/simple
-./bringdown.sh
-docker network create jupyterhub
-docker-compose pull notebook
-docker-compose build jupyterhub
-docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock --net jupyterhub --name jupyterhub -p8000:8000 hub
 
 Original source:  https://github.com/jupyterhub/dockerspawner/tree/master/examples/simple
 
@@ -26,39 +18,24 @@ It does not:
 - enable persistent storage for users or the hub
 - run the proxy in its own container
 
-## Initial setup
-
-The first thing we are going to do is create a network for jupyterhub to use.
-
-```bash
-docker network create jupyterhub
 ```
-
-Second, we are going to build our hub image:
-
-```bash
-docker build -t hub .
-```
-
-We also want to pull the image that will be used:
-
-```bash
-docker pull jupyter/base-notebook
-```
-
-## Start the hub
-
-To start the hub, we want to:
-
-- run it on the docker network
-- expose port 8000
-- mount the host docker socket
-
-```bash
-docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock --net jupyterhub --name jupyterhub -p8000:8000 hub
+cd jupyterhub_basics/examples/simple
+./bringdown.sh
+docker-compose pull notebook
+docker-compose build jupyterhub
+docker-compose up
 ```
 
 Now we should have jupyterhub running on port 8000 on our docker host.
+
+Point a browser at:
+
+```
+localhost:8000
+```
+
+and log in with any userid and any password.  You should see a jupyterhub splash screen and be able to start a scipy notebook.
+
 
 ## Further goals
 

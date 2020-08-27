@@ -1,13 +1,3 @@
-https://github.com/phaustin/jupyterhub_basics/issues/1
-
-```
-cd jupyterhub_basics/examples/simple
-./bringdown.sh
-docker network create jupyterhub
-docker-compose pull notebook
-docker-compose build jupyterhub
-docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock --net jupyterhub --name jupyterhub -p8000:8000 hub
-```
 
 Original source:  https://github.com/jupyterhub/dockerspawner/tree/master/examples/simple
 
@@ -37,6 +27,15 @@ docker-compose up
 ```
 
 Now we should have jupyterhub running on port 8000 on our docker host.
+
+Point a browser at:
+
+```
+localhost:8000
+```
+
+and log in with any userid and any password.  You should see a jupyterhub splash screen and be able to start a scipy notebook.
+
 
 ## Further goals
 
