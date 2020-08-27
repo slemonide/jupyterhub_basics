@@ -14,12 +14,15 @@ services:
       - jupyterhub
 
   notebook:
-    image: jupyter/base-notebook:latest
+    image: jupyter/scipy-notebook:latest
     
-# the actual name will be <directory_name>_<network_name>
+# force the network name to be "jupyterhub"
+# this needs to be matched in jupyterhub_config.py by:
+# c.DockerSpawner.network_name = 'jupyterhub'
 networks:
     jupyterhub:
       driver: bridge
+      name: jupyterhub
 
 volumes:
   jupyterhub_data:
