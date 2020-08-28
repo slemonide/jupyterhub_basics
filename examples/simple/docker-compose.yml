@@ -3,7 +3,7 @@ version: '3.8'
 services:
   jupyterhub:
     build: hub_image
-    image: hub
+    image: phaustin/jupyterhub:1.1
     container_name: jupyterhub
     depends_on: [notebook]
     ports:
@@ -14,7 +14,9 @@ services:
       - jupyterhub
 
   notebook:
-    image: pangeo/base-notebook:latest
+    build: notebook_image
+    image: phaustin/notebook:0.1
+    container_name: notebook
     
 # force the network name to be "jupyterhub"
 # this needs to be matched in jupyterhub_config.py by:
