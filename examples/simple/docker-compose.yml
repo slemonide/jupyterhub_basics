@@ -14,7 +14,7 @@ services:
       - jupyterhub
 
   notebook:
-    image: jupyter/scipy-notebook:latest
+    image: phaustin/base-notebook:v0.1
     
 # force the network name to be "jupyterhub"
 # this needs to be matched in jupyterhub_config.py by:
