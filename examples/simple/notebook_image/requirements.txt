@@ -1,0 +1,2 @@
+deepdish>=0.3.6
+geoscilabs>=0.2.0
