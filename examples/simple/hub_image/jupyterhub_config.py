@@ -16,6 +16,9 @@ c.DockerSpawner.image_whitelist = {'scipy':'phaustin/notebook:0.1',
                                    'pangeo':'phaustin/notebook:0.1'}
 # tell the user containers to connect to our docker network
 c.DockerSpawner.network_name = 'jupyterhub'
+#c.DockerSpawner.default_url = '/lab'
+c.DockerSpawner.notebook_dir = '~/notebooks'
+c.DockerSpawner.args = ['--NotebookApp.default_url=/notebooks/index.ipynb']
 
 # delete containers when the stop
 c.DockerSpawner.remove = True
