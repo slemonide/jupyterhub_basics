@@ -12,7 +12,7 @@ c.JupyterHub.hub_connect_ip = 'jupyterhub'
 
 # pick a docker image. This should have the same version of jupyterhub
 # in it as our Hub.
-c.DockerSpawner.image_whitelist = {'scipy':'jupyter/scipy-notebook:latest',
+c.DockerSpawner.image_whitelist = {'scipy':'phaustin/notebook:0.1',
                                    'pangeo':'phaustin/notebook:0.1'}
 # tell the user containers to connect to our docker network
 c.DockerSpawner.network_name = 'jupyterhub'
