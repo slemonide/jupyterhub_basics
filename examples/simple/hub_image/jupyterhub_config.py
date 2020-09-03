@@ -19,3 +19,7 @@ c.DockerSpawner.network_name = 'jupyterhub'
 
 # delete containers when the stop
 c.DockerSpawner.remove = True
+
+# explicitly set cmd, so we start jupyterhub-singleuser rather than jupyter notebook
+# This is useful when running docker images that aren't built specifically for JupyterHub
+c.DockerSpawner.cmd = 'jupyterhub-singleuser'
