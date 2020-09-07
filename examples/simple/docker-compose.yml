@@ -3,7 +3,7 @@ version: '3.8'
 services:
   jupyterhub:
     build: hub_image
-    image: phaustin/jupyterhub:1.1
+    image: phaustin/jupyterhub:1.2
     container_name: jupyterhub
     depends_on: [notebook]
     ports:
