@@ -1,4 +1,4 @@
-FROM pangeo/base-image:master
+FROM phaustin/base-image:sep05
 
 USER ${NB_USER}
 
