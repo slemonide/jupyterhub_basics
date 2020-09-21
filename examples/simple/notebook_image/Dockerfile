@@ -4,6 +4,6 @@ USER ${NB_USER}
 
 RUN mkdir -p ${HOME}/work
 
-WORKDIR ${HOME}
+WORKDIR ${HOME}/work
 
 CMD ["jupyterhub-singleuser"]
