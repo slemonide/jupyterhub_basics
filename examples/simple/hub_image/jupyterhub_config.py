@@ -8,14 +8,14 @@ c.JupyterHub.spawner_class = 'dockerspawner.DockerSpawner'
 c.JupyterHub.hub_ip = '0.0.0.0'
 # the hostname/ip that should be used to connect to the hub
 # this is usually the hub container's name
-c.JupyterHub.hub_connect_ip = 'jupyterhub'
+c.JupyterHub.hub_connect_ip = 'jupyterhub_basic'
 
 # pick a docker image. This should have the same version of jupyterhub
 # in it as our Hub.
-c.DockerSpawner.image = 'jupyter/scipy-notebook:latest'
+c.DockerSpawner.image = 'phaustin/notebook:step1'
 
 # tell the user containers to connect to our docker network
-c.DockerSpawner.network_name = 'jupyterhub'
+c.DockerSpawner.network_name = 'net_basic'
 
 # delete containers when the stop
 c.DockerSpawner.remove = True

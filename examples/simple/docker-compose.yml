@@ -4,26 +4,26 @@ services:
   jupyterhub:
     build: hub_image
     image: hub
-    container_name: jupyterhub
+    container_name: jupyterhub_basic
     depends_on: [notebook]
     ports:
-      - "8000:8000"
+      - "8082:8000"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
     networks:
-      - jupyterhub
+      - jupyterhub_step1
 
   notebook:
-    image: jupyter/scipy-notebook:latest
-    
+    image: phaustin/notebook:step1
+    build:
+      context: notebook_image
+    container_name: notebook_ste[1
+
 # force the network name to be "jupyterhub"
 # this needs to be matched in jupyterhub_config.py by:
 # c.DockerSpawner.network_name = 'jupyterhub'
 networks:
-    jupyterhub:
+    jupyterhub_step1:
       driver: bridge
-      name: jupyterhub
-
-volumes:
-  jupyterhub_data:
+      name: net_basic
 
