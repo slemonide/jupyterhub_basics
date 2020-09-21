@@ -17,7 +17,7 @@ services:
     image: phaustin/notebook:step1
     build:
       context: notebook_image
-    container_name: notebook_ste[1
+    container_name: notebook_step1
 
 # force the network name to be "jupyterhub"
 # this needs to be matched in jupyterhub_config.py by:
