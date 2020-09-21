@@ -18,6 +18,6 @@ c.DockerSpawner.notebook_dir = notebook_dir
 
 # tell the user containers to connect to our docker network
 c.DockerSpawner.network_name = 'net_basic'
-
+c.DockerSpawner.volumes = {"jupyterhub-user-{username}": notebook_dir}
 # delete containers when the stop
 c.DockerSpawner.remove = True
