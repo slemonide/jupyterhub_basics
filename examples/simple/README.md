@@ -1,11 +1,13 @@
 https://github.com/phaustin/jupyterhub_basics/issues/1
 
+```
 cd jupyterhub_basics/examples/simple
 ./bringdown.sh
 docker network create jupyterhub
 docker-compose pull notebook
 docker-compose build jupyterhub
 docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock --net jupyterhub --name jupyterhub -p8000:8000 hub
+```
 
 Original source:  https://github.com/jupyterhub/dockerspawner/tree/master/examples/simple
 
