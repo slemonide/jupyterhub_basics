@@ -8,7 +8,7 @@ c.JupyterHub.spawner_class = 'dockerspawner.DockerSpawner'
 c.JupyterHub.hub_ip = '0.0.0.0'
 # the hostname/ip that should be used to connect to the hub
 # this is usually the hub container's name
-c.JupyterHub.hub_connect_ip = 'jupyterhub_basic'
+c.JupyterHub.hub_connect_ip = 'jupyterhub_test'
 
 # pick a docker image. This should have the same version of jupyterhub
 # in it as our Hub.
@@ -17,7 +17,7 @@ notebook_dir = "/home/jovyan/work"
 c.DockerSpawner.notebook_dir = notebook_dir
 
 # tell the user containers to connect to our docker network
-c.DockerSpawner.network_name = 'net_basic'
+c.DockerSpawner.network_name = 'net_test'
 c.DockerSpawner.volumes = {"jupyterhub-user-{username}": notebook_dir}
 # delete containers when the stop
 c.DockerSpawner.remove = True

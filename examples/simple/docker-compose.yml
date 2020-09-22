@@ -3,11 +3,11 @@ version: '3.8'
 services:
   jupyterhub:
     build: hub_image
-    image: phaustin/newhub:step1
-    container_name: jupyterhub_basic
+    image: phaustin/newhub:test
+    container_name: jupyterhub_test
     depends_on: [notebook]
     ports:
-      - "8082:8000"
+      - ${NB_PORT}:8000
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
     networks:
@@ -17,7 +17,7 @@ services:
     image: phaustin/notebook:step1
     build:
       context: notebook_image
-    container_name: notebook_step1
+    container_name: notebook_test
 
 # force the network name to be "jupyterhub"
 # this needs to be matched in jupyterhub_config.py by:
@@ -25,5 +25,5 @@ services:
 networks:
     jupyterhub_step1:
       driver: bridge
-      name: net_basic
+      name: net_test
 
