@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  jupyterhub:
+  jupyterhub_test:
     build: hub_image
     image: phaustin/newhub:test
     container_name: jupyterhub_test
@@ -11,7 +11,7 @@ services:
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
     networks:
-      - jupyterhub_step1
+      - net_test
 
   notebook:
     image: phaustin/notebook:step1
@@ -23,7 +23,7 @@ services:
 # this needs to be matched in jupyterhub_config.py by:
 # c.DockerSpawner.network_name = 'jupyterhub'
 networks:
-    jupyterhub_step1:
+    net_test:
       driver: bridge
       name: net_test
 
