@@ -11,6 +11,7 @@ dependencies:
   - scipy
   - matplotlib
   - netcdf4
+  - pyhdf
   - hdf4
   - Pillow
   - jupytext

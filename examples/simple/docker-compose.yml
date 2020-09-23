@@ -3,7 +3,7 @@ version: '3.8'
 services:
   jupyterhub_test:
     build: hub_image
-    image: phaustin/newhub:test
+    image: phaustin/newhub:sep23
     container_name: jupyterhub_test
     depends_on: [notebook]
     ports:
@@ -14,7 +14,7 @@ services:
       - net_test
 
   notebook:
-    image: phaustin/notebook:step1
+    image: phaustin/notebook:sep23
     build:
       context: notebook_image
     container_name: notebook_test

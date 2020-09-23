@@ -1,5 +1,5 @@
 # platform: linux-64
-# env_hash: 08230c50432b50ab1dc4f26fc4a009e66b71433380dc6bbe7db43796623ac98b
+# env_hash: d88237022c3c24bd3f24ad1ea94a34588f88a9ff0a5f8f642f97e90a46c513a8
 @EXPLICIT
 https://conda.anaconda.org/conda-forge/linux-64/_libgcc_mutex-0.1-conda_forge.tar.bz2#d7c89558ba9fa0495403155b64376d81
 https://conda.anaconda.org/conda-forge/linux-64/ca-certificates-2020.6.20-hecda079_0.tar.bz2#1b1cca86e95c416a8e7eb6062af6d503
@@ -22,7 +22,7 @@ https://conda.anaconda.org/conda-forge/linux-64/libuv-1.39.0-h516909a_0.tar.bz2#
 https://conda.anaconda.org/conda-forge/linux-64/libwebp-base-1.1.0-h516909a_3.tar.bz2#3d543511584978d6e22b6c194ae3b81e
 https://conda.anaconda.org/conda-forge/linux-64/lz4-c-1.9.2-he1b5a44_3.tar.bz2#b2e54aad8640e7a877d2280d3ebfe85b
 https://conda.anaconda.org/conda-forge/linux-64/ncurses-6.2-he1b5a44_1.tar.bz2#d3da4932f3d8e6b3c81fcf177d1e6eab
-https://conda.anaconda.org/conda-forge/linux-64/openssl-1.1.1g-h516909a_1.tar.bz2#6fdcd20ec22aeffa10b6102bccc47e7f
+https://conda.anaconda.org/conda-forge/linux-64/openssl-1.1.1h-h516909a_0.tar.bz2#3a99e0cb8f325dbf8f616da2d2fb6d4f
 https://conda.anaconda.org/conda-forge/linux-64/xz-5.2.5-h516909a_1.tar.bz2#33f601066901f3e1a85af3522a8113f9
 https://conda.anaconda.org/conda-forge/linux-64/yaml-0.2.5-h516909a_0.tar.bz2#03a530e925414902547cf48da7756db8
 https://conda.anaconda.org/conda-forge/linux-64/zlib-1.2.11-h516909a_1009.tar.bz2#93486907c6757170a5125198506d9cf8
@@ -114,6 +114,7 @@ https://conda.anaconda.org/conda-forge/linux-64/cryptography-3.1-py38h766eaa4_0.
 https://conda.anaconda.org/conda-forge/noarch/importlib_metadata-1.7.0-0.tar.bz2#3e6503b25200f60149cce699a47cf09e
 https://conda.anaconda.org/conda-forge/linux-64/jupyter_core-4.6.3-py38h32f6830_1.tar.bz2#8044bf1dbabee1a38484f4ae180dfbe6
 https://conda.anaconda.org/conda-forge/noarch/mako-1.1.3-pyh9f0ad1d_0.tar.bz2#7c87121b0244cf6a1f44a1df12a846ea
+https://conda.anaconda.org/conda-forge/linux-64/pyhdf-0.10.2-py38hcc2d4bd_1.tar.bz2#a7dea399b3086bcc649bef88eb574c8c
 https://conda.anaconda.org/conda-forge/linux-64/scipy-1.5.2-py38h8c5af15_0.tar.bz2#29cb9b969a3c9a6e23eb973a77799e8b
 https://conda.anaconda.org/conda-forge/linux-64/setuptools-49.6.0-py38h32f6830_1.tar.bz2#062a087866cd8acd6b736f1b876cb2ad
 https://conda.anaconda.org/conda-forge/linux-64/terminado-0.9.1-py38h32f6830_0.tar.bz2#967d74fb7767c3a863c4e5732d953114

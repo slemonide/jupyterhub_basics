@@ -1,8 +1,11 @@
-FROM phaustin/base-image:sep05
+FROM phaustin/base-image:sep23
 
 USER ${NB_USER}
 
 RUN mkdir -p ${HOME}/work
+RUN mkdir -p ${HOME}/work/sat_data
+RUN mkdir -p ${HOME}/work/a301_lib
+RUN mkdir -p ${HOME}/work/data_share
 
 RUN echo "conda activate ${CONDA_ENV}" >> ${HOME}/.bashrc
 COPY jupyter_notebook_config.py /etc/jupyter/
