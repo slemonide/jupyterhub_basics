@@ -4,7 +4,7 @@ services:
   jupyterhub_test:
     build: hub_image
     image: phaustin/hub07:sep23
-    container_name: jupyterhub_sep23
+    container_name: jupyterhub_sep23n7
     depends_on: [notebook]
     ports:
       - ${NB_PORT}:8000
@@ -14,10 +14,10 @@ services:
       - net_test
 
   notebook:
-    image: phaustin/notebook:sep23
+    image: phaustin/notebook:sep23n7
     build:
       context: notebook_image
-    container_name: notebook_sep23
+    container_name: notebook_sep23n7
 
 # force the network name to be "jupyterhub"
 # this needs to be matched in jupyterhub_config.py by:
@@ -25,5 +25,5 @@ services:
 networks:
     net_test:
       driver: bridge
-      name: net_sep23
+      name: net_sep23n7
 
