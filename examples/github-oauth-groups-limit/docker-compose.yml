@@ -1,0 +1,64 @@
+version: '3.8'
+
+services:
+  jupyterhub:
+    build: hub_image
+    image: phaustin/newhub:step1
+    container_name: jupyterhub_basic
+    depends_on: [notebook]
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    networks:
+      - jupyterhub_step1
+    environment:
+      VIRTUAL_HOST: "eoas05.eoas.ubc.ca"
+      LETSENCRYPT_HOST: "eoas05.eoas.ubc.ca"
+      VIRTUAL_PORT: "8000"
+    env_file: .env
+
+  notebook:
+    image: phaustin/notebook:step1
+    build:
+      context: notebook_image
+    container_name: notebook_step1
+
+  # see https://linuxhandbook.com/nginx-reverse-proxy-docker/
+  reverse-proxy:
+    image: "jwilder/nginx-proxy:latest"
+    container_name: "reverse-proxy"
+    volumes:
+      - "/data/jupyterhub_basics/examples/github-oauth/reverse-proxy/usr/share/nginx/html:/usr/share/nginx/html"
+      - "/data/jupyterhub_basics/examples/github-oauth/reverse-proxy/etc/nginx/dhparam:/etc/nginx/dhparam"
+      - "/data/jupyterhub_basics/examples/github-oauth/reverse-proxy/etc/nginx/vhost.d:/etc/nginx/vhost.d"
+      - "/data/jupyterhub_basics/examples/github-oauth/reverse-proxy/etc/nginx/certs:/etc/nginx/certs"
+      - "/var/run/docker.sock:/tmp/docker.sock:ro"
+    networks: 
+      - jupyterhub_step1
+    ports:
+      - "80:80"
+      - "443:443"
+
+  letsencrypt:
+    image: "jrcs/letsencrypt-nginx-proxy-companion:latest"
+    container_name: "letsencrypt-helper"
+    volumes:
+      - "/data/jupyterhub_basics/examples/github-oauth/reverse-proxy/usr/share/nginx/html:/usr/share/nginx/html"
+      - "/data/jupyterhub_basics/examples/github-oauth/reverse-proxy/etc/nginx/dhparam:/etc/nginx/dhparam"
+      - "/data/jupyterhub_basics/examples/github-oauth/reverse-proxy/etc/nginx/vhost.d:/etc/nginx/vhost.d"
+      - "/data/jupyterhub_basics/examples/github-oauth/reverse-proxy/etc/nginx/certs:/etc/nginx/certs"
+      - "/run/docker.sock:/var/run/docker.sock:ro"
+    environment:
+      NGINX_PROXY_CONTAINER: "reverse-proxy"
+      DEFAULT_EMAIL: "slemonide@gmail.com"
+    depends_on:
+      - "reverse-proxy"
+    networks: 
+      - jupyterhub_step1
+
+# force the network name to be "jupyterhub"
+# this needs to be matched in jupyterhub_config.py by:
+# c.DockerSpawner.network_name = 'jupyterhub'
+networks:
+  jupyterhub_step1:
+    driver: bridge
+    name: net_basic

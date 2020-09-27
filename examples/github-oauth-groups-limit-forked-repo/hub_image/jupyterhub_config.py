@@ -25,6 +25,6 @@ c.DockerSpawner.remove = True
 # Github OAuth
 from oauthenticator.github import GitHubOAuthenticator
 c.JupyterHub.authenticator_class = GitHubOAuthenticator
-c.GitHubOAuthenticator.allowed_organizations = ['eoas-ubc-github-shared-test']
+c.GitHubOAuthenticator.allowed_organizations = ['eoas-ubc-github-shared']
 
 #c.GitLabOAuthenticator.scope = ['openid', 'read_user']

@@ -1,0 +1,4 @@
+dockerspawner
+#jupyterhub-dummyauthenticator
+#oauthenticator
+git+https://github.com/jupyterhub/oauthenticator.git
