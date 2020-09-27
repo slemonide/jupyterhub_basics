@@ -1,0 +1,69 @@
+version: '3.8'
+
+services:
+  jupyterhub:
+    build: hub_image
+    image: phaustin/newhub:step1
+    container_name: jupyterhub_basic
+    depends_on: [notebook]
+    ports:
+      - "8080:8000"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    networks:
+      - jupyterhub_step1
+      - web
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.jupyterhub_basic1.rule=Host(`eoas05.eoas.ubc.ca`)"
+      - "traefik.http.routers.jupyterhub_basic1.entrypoints=http"
+      #- "traefik.http.routers.jupyterhub_basic1.entrypoints=websecure"
+      #- "traefik.http.routers.jupyterhub_basic1.tls.certresolver=myresolver"
+      - "traefik.http.services.jupyterhub_basic1.loadbalancer.server.port=8000"
+      #- "traefik.http.routers.jupyterhub_basic-http.middlewares=https-redirect@file"
+      #- "traefik.http.routers.jupyterhub_basic-http.rule=Host(`eoas05.eoas.ubc.ca`)"
+
+  notebook:
+    image: phaustin/notebook:step1
+    build:
+      context: notebook_image
+    container_name: notebook_step1
+
+  traefik:
+    image: "traefik:v2.2"
+    container_name: "traefik"
+    command:
+      - "--log.level=INFO"
+      - "--api=false"
+      - "--api.insecure=false"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.websecure.address=:443"
+      - "--entrypoints.http.address=:80"
+      - "--certificatesresolvers.myresolver.acme.tlschallenge=true"
+      # Uncomment the line below to use staging https service for testing and debugging
+      # Comment it for actually getting a valid https certificate
+      #- "--certificatesresolvers.myresolver.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory"
+      - "--certificatesresolvers.myresolver.acme.email=slemonide@gmail.com"
+      - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
+    env_file:
+      - .env
+    ports:
+      - "443:443"
+      - "80:80"
+    networks:
+      - web
+    volumes:
+      - "./letsencrypt:/letsencrypt"
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "/etc/localtime:/etc/localtime:ro"
+
+# force the network name to be "jupyterhub"
+# this needs to be matched in jupyterhub_config.py by:
+# c.DockerSpawner.network_name = 'jupyterhub'
+networks:
+    jupyterhub_step1:
+      #driver: bridge
+      name: net_basic
+      external: true
+    web:

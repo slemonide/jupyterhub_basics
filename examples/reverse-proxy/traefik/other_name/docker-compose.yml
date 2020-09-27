@@ -1,0 +1,62 @@
+version: '3.8'
+
+services:
+  jupyterhub:
+    build: hub_image
+    image: phaustin/newhub:step1
+    container_name: jupyterhub_basic
+    depends_on: [notebook]
+#    ports:
+#      - "80:8000"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    networks:
+      - jupyterhub_step1
+      - web
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.jupyterhub_basic.rule=Host(`eoas05.eoas.ubc.ca`)"
+      - "traefik.http.routers.jupyterhub_basic.entrypoints=http"
+      - "traefik.http.services.jupyterhub_basic.loadbalancer.server.port=8000"
+
+  notebook:
+    image: phaustin/notebook:step1
+    build:
+      context: notebook_image
+    container_name: notebook_step1
+
+  traefik:
+    image: "traefik:v2.2"
+    container_name: "traefik"
+    command:
+      - "--log.level=INFO"
+      - "--api=true"
+      - "--api.insecure=false"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.http.address=:80"
+      - "--api.dashboard=true"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.dashboard.rule=Host(`eoas05.eoas.ubc.ca`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))"
+      - "traefik.http.routers.dashboard.service=api@internal"
+      - "traefik.http.routers.dashboard.middlewares=auth"
+      - "traefik.http.routers.dashboard.entrypoints=http"
+      - "traefik.http.middlewares.auth.basicauth.users=dash:$$apr1$$UyG9cgs2$$pe7Q4uw2raIz2Gpv4c3Ro0"
+    ports:
+      - "8080:80"
+    networks:
+      - web
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+
+# force the network name to be "jupyterhub"
+# this needs to be matched in jupyterhub_config.py by:
+# c.DockerSpawner.network_name = 'jupyterhub'
+networks:
+    jupyterhub_step1:
+      driver: bridge
+      name: net_basic
+    web:
+      driver: bridge
+      name: web
