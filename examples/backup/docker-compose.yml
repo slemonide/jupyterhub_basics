@@ -57,6 +57,17 @@ services:
     networks: 
       - jupyterhub_step1
 
+  restic:
+    image: mazzolino/restic
+    environment:
+        BACKUP_CRON: "0 0 * * * *"
+        RESTIC_REPOSITORY: /mnt/restic
+        RESTIC_PASSWORD: jupyter-volumes
+        RESTIC_BACKUP_SOURCES: /source
+    volumes:
+        - "/data/jupyterhub/backup/jupyter/:/source/data/jupyterhub/backup/jupyter/"
+        - "/data/jypyterhub/backup/restic/mnt/restic/:/mnt/restic"
+
 # force the network name to be "jupyterhub"
 # this needs to be matched in jupyterhub_config.py by:
 # c.DockerSpawner.network_name = 'jupyterhub'
